@@ -69,3 +69,4 @@ Repo **Settings → Pages → Deploy from a branch → main → / (root)**.
 - [ ] Replace placeholder projects and photos with real ones
 - [ ] Confirm official UST colors and fonts with University Marketing
 - [ ] Approved text for the About page
+- [ ] Change the Add/Delete approach
