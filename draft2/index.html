@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capstone Gallery · University of St. Thomas</title>
+  <meta name="description" content="Explore student capstone work at the University of St. Thomas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Capstone Gallery home">
+        <img src="images/ust-logo.png" alt="University of St. Thomas">
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html" aria-current="page">Gallery</a>
+        <a href="about.html" class="nav-about">About Capstone</a>
+        <div class="menu-wrap dept-menu">
+          <button type="button" class="dept-toggle" aria-expanded="false" aria-haspopup="true">Departments
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <ul class="menu dept-list" hidden></ul>
+        </div>
+        <a class="nav-search" href="search.html" aria-label="Search projects">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <p class="eyebrow">The Capstone Gallery</p>
+        <h1>Beyond the Classroom</h1>
+        <p class="hero-sub">Explore ideas taking shape across disciplines. A space to discover student capstone work at St. Thomas.</p>
+        <a class="hero-link" href="#main">Explore projects <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main" class="container work">
+    <div class="work-head">
+      <h2>Explore the work</h2>
+      <p id="count" class="count" aria-live="polite"></p>
+    </div>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <span class="sr-only">Search projects</span>
+        <input id="search" type="search" placeholder="Search projects, ideas or keywords" autocomplete="off">
+      </label>
+      <a id="to-search" class="btn" href="search.html?filters=open">Search &amp; filters <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><path d="M15 4v4M9 10v4M17 16v4"/></svg></a>
+      <div id="sort" class="dropdown dropdown-btn" data-align="right"></div>
+    </div>
+
+    <div id="chips" class="chips" role="group" aria-label="Filter by department"></div>
+
+    <div id="results" class="masonry"></div>
+    <div class="more-wrap"><button id="more" class="btn" type="button" hidden>Explore more projects <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button></div>
+  </main>
+
+  <dialog id="project" class="modal" aria-labelledby="p-title"></dialog>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-title">Curiosity, across disciplines.</p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="https://www.stthomas.edu/" target="_blank" rel="noopener">University of St. Thomas ↗</a>
+        <a href="about.html">About Capstone</a>
+        <a href="https://www.stthomas.edu/accessibility/" target="_blank" rel="noopener">Accessibility</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
