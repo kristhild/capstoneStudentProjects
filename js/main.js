@@ -1,36 +1,17 @@
 /* ==========================================================
    Capstone Gallery
-   Reads projects.csv and builds the pages.
-   To add or remove projects, edit projects.csv (see README.md).
+   Reads the project lists in data/ and builds the pages.
+   - data/projects.json        real projects (written automatically from approved GitHub issues)
+   - data/sample-projects.json placeholder projects (delete this file when real projects are in)
+   See README.md for how to add or remove a project.
    ========================================================== */
 
-const CSV_FILE = "projects.csv";
+const DATA_FILES = ["data/projects.json", "data/sample-projects.json"];
 const HOME_COUNT = 12;   // how many projects the home page shows at first
 // The order of the department buttons. Departments not listed here go at the end.
 const DEPARTMENT_ORDER = ["Engineering", "Arts", "Education", "Design"];
 
-/* ---------- Load projects.csv ---------- */
-
-// Turns CSV text into rows. Supports "quoted, values" with commas.
-function parseCSV(text) {
-  const rows = [];
-  let row = [], field = "", inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (inQuotes) {
-      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
-      else if (c === '"') inQuotes = false;
-      else field += c;
-    } else if (c === '"') inQuotes = true;
-    else if (c === ",") { row.push(field); field = ""; }
-    else if (c === "\n" || c === "\r") {
-      if (c === "\r" && text[i + 1] === "\n") i++;
-      row.push(field); rows.push(row); row = []; field = "";
-    } else field += c;
-  }
-  if (field || row.length) { row.push(field); rows.push(row); }
-  return rows.filter(r => r.some(cell => cell.trim()));
-}
+/* ---------- Load the project lists ---------- */
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "project";
@@ -50,17 +31,32 @@ function safeLink(url) {
 const ART_STYLES = ["mist", "deep", "cream", "lavender"];
 const ART_TEXT = { mist: "Water,|reconsidered.", deep: "Small systems.|New possibilities.", cream: "Ways|of seeing.", lavender: "A shared|future." };
 
+// Reads one list. A missing or broken file is skipped instead of breaking the site.
+async function loadList(file) {
+  try {
+    const res = await fetch(file, { cache: "no-cache" });
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    console.warn(file + " is not a list of projects, so it was skipped.");
+  } catch (err) {
+    console.warn(file + " could not be read, so it was skipped.", err);
+  }
+  return [];
+}
+
+const text = v => (typeof v === "string" ? v.trim() : typeof v === "number" ? String(v) : "");
+
 async function loadProjects() {
-  const res = await fetch(CSV_FILE, { cache: "no-cache" });
-  if (!res.ok) throw new Error("Could not load projects.csv");
-  const rows = parseCSV(await res.text());
-  const headers = rows.shift().map(h => h.trim().toLowerCase());
+  const lists = await Promise.all(DATA_FILES.map(loadList));
+  const rows = lists.flat();
   const seen = {};
 
-  return rows.map((cells, order) => {
+  return rows.map((row, order) => {
+    if (!row || typeof row !== "object") return null; // skip anything that isn't a project
     const r = {};
-    headers.forEach((h, i) => (r[h] = (cells[i] || "").trim()));
-    if (!r.title) return null;
+    for (const [k, v] of Object.entries(row)) r[k.toLowerCase()] = text(v);
+    if (!r.title) return null; // a project needs at least a title
     let id = slugify(r.title);
     seen[id] = (seen[id] || 0) + 1;
     if (seen[id] > 1) id += "-" + seen[id];

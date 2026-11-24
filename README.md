@@ -12,49 +12,44 @@ A static website (HTML, CSS, JavaScript, no backend) that shows student capstone
 ## Files
 
 ```
-index.html      Gallery (home): hero, search, department buttons, project cards
-search.html     Search results: search, filters, sort
-about.html      About Capstone page
-projects.csv    THE LIST OF PROJECTS (edit this to add/delete projects)
-css/style.css   Design, colors and fonts
-js/main.js      Reads projects.csv and builds the pages
-images/         Logo, hero photo and project pictures
+index.html                    Gallery (home): hero, search, department buttons, project cards
+search.html                   Search results: search, filters, sort
+about.html                    About Capstone page
+data/projects.json            Real projects. Written automatically from approved GitHub issues, don't edit by hand
+data/sample-projects.json     Placeholder projects. Delete this file when real projects are in
+css/style.css                 Design, colors and fonts
+js/main.js                    Reads the data files and builds the pages
+images/                       Logo, hero photo and sample pictures
+images/projects/              Project pictures, saved automatically
+.github/ISSUE_TEMPLATE/       The "Add a capstone project" form
+.github/workflows/            The automation that updates the gallery
+scripts/update-projects.mjs   The script the automation runs
 ```
 
-## Add or delete a project
+## Add, edit or remove a project (no coding)
 
-All changes happen in **`projects.csv`** on github.com:
+Projects are managed with **GitHub Issues**. There is no file to edit, so a typo can't break the site.
 
-1. Open `projects.csv` and click the **pencil icon**.
-2. **Add:** add one line at the bottom. **Delete:** remove that project's line.
-3. Click **Commit changes**. The site updates in about 1–2 minutes.
+**Add**
+1. In this repo, go to **Issues → New issue → Add a capstone project**.
+2. Fill in the form (title, names, department, semester, summary, pictures, links) and click **Create**.
+3. An admin reviews it and adds the **approved** label. Within about a minute the project is on the gallery,
+   and a comment on the issue confirms it.
 
-| Column | What to put |
-|---|---|
-| title | Project name |
-| label | Small purple word above the title. Leave empty to show the semester. `Placeholder` marks sample projects |
-| students | Student names, e.g. `Student A · Student B` |
-| team | Team name (optional) |
-| department | e.g. `Engineering`. Used for the department buttons, filter and menu |
-| semester | e.g. `Spring 2026`. Used for sorting and the semester filter |
-| type | e.g. `Prototype`, `Research`, `Publication`, `Creative work` |
-| partner | Community partner name, or empty if none |
-| advisor | Faculty advisor |
-| summary | One short sentence shown at the top of the project |
-| overview, purpose, process, outcomes | The four sections of the project page |
-| image | Cover picture, e.g. `images/my-project.jpg`. Empty = placeholder artwork |
-| cover_style | Placeholder artwork color: `mist`, `deep`, `cream` or `lavender` (only used when there's no image) |
-| cover_text | Words on the placeholder artwork. Use `\|` for a new line |
-| cover_size | Card shape: width ÷ height, e.g. `0.8` (tall), `1` (square). Empty = picture's own shape |
-| more_images | Pictures for "A closer look", separated by `\|` |
-| report, presentation, website | Links (PDF or website). Empty = not shown |
+**Edit:** open the project's issue, click **⋯ → Edit**, change the answers and save. The gallery updates automatically.
+
+**Remove:** remove the **approved** label, or close the issue.
+
+**If something is wrong** (for example the semester isn't written like "Fall 2026"), the project is not added and the
+issue gets a comment listing what to fix. The rest of the gallery is never affected.
 
 Notes:
-- If text contains a comma, wrap it in quotes: `"Water, reconsidered"`.
-- Upload pictures and PDFs to the `images` folder (or a `files` folder) first, then use their path.
-- Text in `[brackets]` is placeholder text from the design. Real projects don't need brackets.
+- Only people with access to this repo can add the **approved** label, so nothing goes live without an admin.
+- Students need a free GitHub account to use the form, or they can send their answers to the admin, who fills in the form for them.
+- The department and project type choices are set in `.github/ISSUE_TEMPLATE/add-project.yml`.
 - The order of the department buttons is set at the top of `js/main.js` (`DEPARTMENT_ORDER`).
-- Each project has its own link you can share, e.g. `index.html?project=water-reconsidered`.
+- Each project has its own link you can share, e.g. `index.html?project=solar-bench`.
+- To rebuild the gallery by hand: **Actions → Update gallery projects → Run workflow**.
 
 ## Run locally
 
@@ -67,6 +62,6 @@ Repo **Settings → Pages → Deploy from a branch → main → / (root)**.
 ## TODO
 
 - [ ] Replace placeholder projects and photos with real ones
-- [ ] Confirm official UST colors and fonts with University Marketing
+- [x] Confirm official UST colors and fonts with University Marketing
 - [ ] Approved text for the About page
-- [ ] Change the Add/Delete approach
+- [x] Change the Add/Delete approach (GitHub Issue form + automation)

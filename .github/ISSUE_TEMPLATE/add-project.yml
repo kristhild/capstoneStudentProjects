@@ -1,0 +1,168 @@
+name: Add a capstone project
+description: Submit a project to the Capstone Gallery. It goes live after an admin adds the "approved" label.
+title: "Project: "
+labels: ["project submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in this form to add a project to the Capstone Gallery.
+        Fields marked with a red star are required. Nothing appears on the site until an admin approves it.
+
+  - type: input
+    id: title
+    attributes:
+      label: Project title
+      placeholder: "Water, reconsidered"
+    validations:
+      required: true
+
+  - type: input
+    id: students
+    attributes:
+      label: Student names
+      description: Separate names with a comma.
+      placeholder: "Jane Doe, Sam Lee"
+    validations:
+      required: true
+
+  - type: input
+    id: team
+    attributes:
+      label: Team name
+    validations:
+      required: false
+
+  - type: dropdown
+    id: department
+    attributes:
+      label: Department
+      options:
+        - Engineering
+        - Arts
+        - Education
+        - Design
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: semester
+    attributes:
+      label: Semester
+      description: Season and year, for example "Fall 2026".
+      placeholder: "Fall 2026"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Project type
+      options:
+        - Prototype
+        - Research
+        - Publication
+        - Creative work
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: advisor
+    attributes:
+      label: Faculty advisor
+    validations:
+      required: false
+
+  - type: input
+    id: partner
+    attributes:
+      label: Community partner
+      description: Leave empty if there was no community partner.
+    validations:
+      required: false
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Short summary
+      description: One or two sentences shown at the top of the project.
+    validations:
+      required: true
+
+  - type: textarea
+    id: overview
+    attributes:
+      label: Overview
+    validations:
+      required: false
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose
+    validations:
+      required: false
+
+  - type: textarea
+    id: process
+    attributes:
+      label: Development process
+    validations:
+      required: false
+
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: Outcomes and reflection
+    validations:
+      required: false
+
+  - type: textarea
+    id: image
+    attributes:
+      label: Cover picture
+      description: Drag one picture into this box. Leave empty to use the gallery's placeholder artwork.
+    validations:
+      required: false
+
+  - type: textarea
+    id: more_images
+    attributes:
+      label: More pictures
+      description: Optional. Drag up to 4 pictures for the "A closer look" section.
+    validations:
+      required: false
+
+  - type: input
+    id: report
+    attributes:
+      label: Report link
+      description: A link starting with https://
+    validations:
+      required: false
+
+  - type: input
+    id: presentation
+    attributes:
+      label: Presentation link
+      description: A link starting with https://
+    validations:
+      required: false
+
+  - type: input
+    id: website
+    attributes:
+      label: Project website link
+      description: A link starting with https://
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      options:
+        - label: Every student listed agreed to have this project, their names and these pictures published on the gallery.
+          required: true
