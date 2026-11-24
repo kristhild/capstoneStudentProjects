@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "title": "Test 00",
+    "label": "",
+    "students": "Parnian",
+    "team": "Team A",
+    "department": "Engineering",
+    "semester": "Fall 2026",
+    "type": "Research",
+    "partner": "",
+    "advisor": "Dr. XXX",
+    "summary": "I researched this and that and this and that. xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.",
+    "overview": "zxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzxzx.",
+    "purpose": "Purpose purpose purpose purpose purpose purpose.",
+    "process": "Development process, development process.",
+    "outcomes": "Our outcome was a negative R^2 and etc. :)",
+    "image": "images/projects/1-472fdafdb6.jpg",
+    "cover_style": "",
+    "cover_text": "",
+    "cover_size": "",
+    "more_images": "images/projects/1-32332d8c38.jpg",
+    "report": "https://arxiv.org/html/2404.18171v1",
+    "presentation": "",
+    "website": "https://parniansemsar.com",
+    "issue": 1
+  }
+]
